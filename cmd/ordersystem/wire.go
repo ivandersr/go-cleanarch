@@ -49,3 +49,11 @@ func NewWebOrderHandler(db *sql.DB, eventDispatcher events.EventDispatcherInterf
 	)
 	return &web.WebOrderHandler{}
 }
+
+func NewGetAllOrdersUseCase(db *sql.DB) *usecase.GetAllOrdersUseCase {
+	wire.Build(
+		setOrderRepositoryDependency,
+		usecase.NewGetAllOrdersUseCase,
+	)
+	return &usecase.GetAllOrdersUseCase{}
+}

@@ -2,7 +2,6 @@ package web
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 
 	"github.com/ivandersr/cleanarch/internal/entity"
@@ -61,5 +60,4 @@ func (h *WebOrderHandler) All(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	fmt.Println("handler:", output.Orders)
 }
