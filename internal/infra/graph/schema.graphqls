@@ -11,6 +11,14 @@ input OrderInput {
     Tax: Float!
 }
 
+type GetAllOrdersOutput {
+    orders: [Order]
+}
+
 type Mutation {
     createOrder(input: OrderInput): Order
+}
+
+type Query {
+    getAllOrders: GetAllOrdersOutput
 }
