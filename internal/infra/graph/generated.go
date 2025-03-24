@@ -44,7 +44,7 @@ type DirectiveRoot struct {
 }
 
 type ComplexityRoot struct {
-	GetAllOrdersOutput struct {
+	ListOrdersOutput struct {
 		Orders func(childComplexity int) int
 	}
 
@@ -60,7 +60,7 @@ type ComplexityRoot struct {
 	}
 
 	Query struct {
-		GetAllOrders func(childComplexity int) int
+		ListOrders func(childComplexity int) int
 	}
 }
 
@@ -68,7 +68,7 @@ type MutationResolver interface {
 	CreateOrder(ctx context.Context, input *model.OrderInput) (*model.Order, error)
 }
 type QueryResolver interface {
-	GetAllOrders(ctx context.Context) (*model.GetAllOrdersOutput, error)
+	ListOrders(ctx context.Context) (*model.ListOrdersOutput, error)
 }
 
 type executableSchema struct {
@@ -86,12 +86,12 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 	_ = ec
 	switch typeName + "." + field {
 
-	case "GetAllOrdersOutput.orders":
-		if e.complexity.GetAllOrdersOutput.Orders == nil {
+	case "ListOrdersOutput.orders":
+		if e.complexity.ListOrdersOutput.Orders == nil {
 			break
 		}
 
-		return e.complexity.GetAllOrdersOutput.Orders(childComplexity), true
+		return e.complexity.ListOrdersOutput.Orders(childComplexity), true
 
 	case "Mutation.createOrder":
 		if e.complexity.Mutation.CreateOrder == nil {
@@ -133,12 +133,12 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.Order.Tax(childComplexity), true
 
-	case "Query.getAllOrders":
-		if e.complexity.Query.GetAllOrders == nil {
+	case "Query.listOrders":
+		if e.complexity.Query.ListOrders == nil {
 			break
 		}
 
-		return e.complexity.Query.GetAllOrders(childComplexity), true
+		return e.complexity.Query.ListOrders(childComplexity), true
 
 	}
 	return 0, false
@@ -296,8 +296,8 @@ func (ec *executionContext) field___Type_fields_args(ctx context.Context, rawArg
 
 // region    **************************** field.gotpl *****************************
 
-func (ec *executionContext) _GetAllOrdersOutput_orders(ctx context.Context, field graphql.CollectedField, obj *model.GetAllOrdersOutput) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_GetAllOrdersOutput_orders(ctx, field)
+func (ec *executionContext) _ListOrdersOutput_orders(ctx context.Context, field graphql.CollectedField, obj *model.ListOrdersOutput) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_ListOrdersOutput_orders(ctx, field)
 	if err != nil {
 		return graphql.Null
 	}
@@ -324,9 +324,9 @@ func (ec *executionContext) _GetAllOrdersOutput_orders(ctx context.Context, fiel
 	return ec.marshalOOrder2ᚕᚖgithubᚗcomᚋivandersrᚋcleanarchᚋinternalᚋinfraᚋgraphᚋmodelᚐOrder(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) fieldContext_GetAllOrdersOutput_orders(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+func (ec *executionContext) fieldContext_ListOrdersOutput_orders(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
-		Object:     "GetAllOrdersOutput",
+		Object:     "ListOrdersOutput",
 		Field:      field,
 		IsMethod:   false,
 		IsResolver: false,
@@ -585,8 +585,8 @@ func (ec *executionContext) fieldContext_Order_FinalPrice(ctx context.Context, f
 	return fc, nil
 }
 
-func (ec *executionContext) _Query_getAllOrders(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_Query_getAllOrders(ctx, field)
+func (ec *executionContext) _Query_listOrders(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Query_listOrders(ctx, field)
 	if err != nil {
 		return graphql.Null
 	}
@@ -599,7 +599,7 @@ func (ec *executionContext) _Query_getAllOrders(ctx context.Context, field graph
 	}()
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Query().GetAllOrders(rctx)
+		return ec.resolvers.Query().ListOrders(rctx)
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -608,12 +608,12 @@ func (ec *executionContext) _Query_getAllOrders(ctx context.Context, field graph
 	if resTmp == nil {
 		return graphql.Null
 	}
-	res := resTmp.(*model.GetAllOrdersOutput)
+	res := resTmp.(*model.ListOrdersOutput)
 	fc.Result = res
-	return ec.marshalOGetAllOrdersOutput2ᚖgithubᚗcomᚋivandersrᚋcleanarchᚋinternalᚋinfraᚋgraphᚋmodelᚐGetAllOrdersOutput(ctx, field.Selections, res)
+	return ec.marshalOListOrdersOutput2ᚖgithubᚗcomᚋivandersrᚋcleanarchᚋinternalᚋinfraᚋgraphᚋmodelᚐListOrdersOutput(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) fieldContext_Query_getAllOrders(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+func (ec *executionContext) fieldContext_Query_listOrders(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "Query",
 		Field:      field,
@@ -622,9 +622,9 @@ func (ec *executionContext) fieldContext_Query_getAllOrders(ctx context.Context,
 		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
 			switch field.Name {
 			case "orders":
-				return ec.fieldContext_GetAllOrdersOutput_orders(ctx, field)
+				return ec.fieldContext_ListOrdersOutput_orders(ctx, field)
 			}
-			return nil, fmt.Errorf("no field named %q was found under type GetAllOrdersOutput", field.Name)
+			return nil, fmt.Errorf("no field named %q was found under type ListOrdersOutput", field.Name)
 		},
 	}
 	return fc, nil
@@ -2584,19 +2584,19 @@ func (ec *executionContext) unmarshalInputOrderInput(ctx context.Context, obj in
 
 // region    **************************** object.gotpl ****************************
 
-var getAllOrdersOutputImplementors = []string{"GetAllOrdersOutput"}
+var listOrdersOutputImplementors = []string{"ListOrdersOutput"}
 
-func (ec *executionContext) _GetAllOrdersOutput(ctx context.Context, sel ast.SelectionSet, obj *model.GetAllOrdersOutput) graphql.Marshaler {
-	fields := graphql.CollectFields(ec.OperationContext, sel, getAllOrdersOutputImplementors)
+func (ec *executionContext) _ListOrdersOutput(ctx context.Context, sel ast.SelectionSet, obj *model.ListOrdersOutput) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, listOrdersOutputImplementors)
 	out := graphql.NewFieldSet(fields)
 	var invalids uint32
 	for i, field := range fields {
 		switch field.Name {
 		case "__typename":
-			out.Values[i] = graphql.MarshalString("GetAllOrdersOutput")
+			out.Values[i] = graphql.MarshalString("ListOrdersOutput")
 		case "orders":
 
-			out.Values[i] = ec._GetAllOrdersOutput_orders(ctx, field, obj)
+			out.Values[i] = ec._ListOrdersOutput_orders(ctx, field, obj)
 
 		default:
 			panic("unknown field " + strconv.Quote(field.Name))
@@ -2713,7 +2713,7 @@ func (ec *executionContext) _Query(ctx context.Context, sel ast.SelectionSet) gr
 		switch field.Name {
 		case "__typename":
 			out.Values[i] = graphql.MarshalString("Query")
-		case "getAllOrders":
+		case "listOrders":
 			field := field
 
 			innerFunc := func(ctx context.Context) (res graphql.Marshaler) {
@@ -2722,7 +2722,7 @@ func (ec *executionContext) _Query(ctx context.Context, sel ast.SelectionSet) gr
 						ec.Error(ctx, ec.Recover(ctx, r))
 					}
 				}()
-				res = ec._Query_getAllOrders(ctx, field)
+				res = ec._Query_listOrders(ctx, field)
 				return res
 			}
 
@@ -3398,11 +3398,11 @@ func (ec *executionContext) marshalOBoolean2ᚖbool(ctx context.Context, sel ast
 	return res
 }
 
-func (ec *executionContext) marshalOGetAllOrdersOutput2ᚖgithubᚗcomᚋivandersrᚋcleanarchᚋinternalᚋinfraᚋgraphᚋmodelᚐGetAllOrdersOutput(ctx context.Context, sel ast.SelectionSet, v *model.GetAllOrdersOutput) graphql.Marshaler {
+func (ec *executionContext) marshalOListOrdersOutput2ᚖgithubᚗcomᚋivandersrᚋcleanarchᚋinternalᚋinfraᚋgraphᚋmodelᚐListOrdersOutput(ctx context.Context, sel ast.SelectionSet, v *model.ListOrdersOutput) graphql.Marshaler {
 	if v == nil {
 		return graphql.Null
 	}
-	return ec._GetAllOrdersOutput(ctx, sel, v)
+	return ec._ListOrdersOutput(ctx, sel, v)
 }
 
 func (ec *executionContext) marshalOOrder2ᚕᚖgithubᚗcomᚋivandersrᚋcleanarchᚋinternalᚋinfraᚋgraphᚋmodelᚐOrder(ctx context.Context, sel ast.SelectionSet, v []*model.Order) graphql.Marshaler {

@@ -31,7 +31,7 @@ func (r *mutationResolver) CreateOrder(ctx context.Context, input *model.OrderIn
 }
 
 // GetAllOrders is the resolver for the getAllOrders field.
-func (r *queryResolver) GetAllOrders(ctx context.Context) (*model.GetAllOrdersOutput, error) {
+func (r *queryResolver) ListOrders(ctx context.Context) (*model.ListOrdersOutput, error) {
 	output, err := r.GetAllOrdersUseCase.Execute()
 	if err != nil {
 		return nil, err
@@ -47,7 +47,7 @@ func (r *queryResolver) GetAllOrders(ctx context.Context) (*model.GetAllOrdersOu
 		orders = append(orders, &parsedOrder)
 	}
 
-	return &model.GetAllOrdersOutput{
+	return &model.ListOrdersOutput{
 		Orders: orders,
 	}, nil
 }

@@ -41,13 +41,13 @@ func (s *OrderService) CreateOrder(ctx context.Context, in *pb.CreateOrderReques
 	}, nil
 }
 
-func (s *OrderService) GetAllOrders(ctx context.Context, in *pb.Empty) (*pb.GetAllOrdersResponse, error) {
+func (s *OrderService) ListOrders(ctx context.Context, in *pb.Empty) (*pb.ListOrdersResponse, error) {
 	output, err := s.GetAllOrdersUseCase.Execute()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &pb.GetAllOrdersResponse{}
+	response := &pb.ListOrdersResponse{}
 
 	for _, order := range output.Orders {
 		var parsedOrder pb.OrderResponse

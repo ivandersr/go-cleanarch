@@ -11,7 +11,7 @@ input OrderInput {
     Tax: Float!
 }
 
-type GetAllOrdersOutput {
+type ListOrdersOutput {
     orders: [Order]
 }
 
@@ -20,5 +20,5 @@ type Mutation {
 }
 
 type Query {
-    getAllOrders: GetAllOrdersOutput
+    listOrders: ListOrdersOutput
 }

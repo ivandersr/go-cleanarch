@@ -24,11 +24,11 @@ message OrderResponse {
 
 message Empty {}
 
-message GetAllOrdersResponse {
+message ListOrdersResponse {
   repeated OrderResponse orders = 1;
 }
 
 service OrderService {
   rpc CreateOrder(CreateOrderRequest) returns (CreateOrderResponse);
-  rpc GetAllOrders(Empty) returns (GetAllOrdersResponse);
+  rpc ListOrders(Empty) returns (ListOrdersResponse);
 }

@@ -2,7 +2,7 @@
 
 package model
 
-type GetAllOrdersOutput struct {
+type ListOrdersOutput struct {
 	Orders []*Order `json:"orders"`
 }
 
